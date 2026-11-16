@@ -154,7 +154,7 @@ collect_files()
 
 if $scm_only; then
 	if test ! -e .scmversion; then
-		res=$(scm_version)
+#		res=$(scm_version)
 		echo "$res" >.scmversion
 	fi
 	exit
@@ -177,9 +177,9 @@ fi
 res="${res}${CONFIG_LOCALVERSION}${LOCALVERSION}"
 
 # scm version string if not at a tagged commit
-if test "$CONFIG_LOCALVERSION_AUTO" = "y"; then
-	# full scm version string
-	res="$res$(scm_version)"
-fi
+# if test "$CONFIG_LOCALVERSION_AUTO" = "y"; then
+#	 full scm version string
+#	res="$res$(scm_version)"
+# fi
 
 echo "$res"
