@@ -25,8 +25,8 @@ quiet_cmd_extract_certs  = EXTRACT_CERTS   $(patsubst "%",%,$(2))
       cmd_extract_certs  = scripts/extract-cert $(2) $@ || ( rm $@; exit 1)
 
 targets += x509_certificate_list
-# $(obj)/x509_certificate_list: scripts/extract-cert $(SYSTEM_TRUSTED_KEYS_SRCPREFIX)$(SYSTEM_TRUSTED_KEYS_FILENAME) FORCE
-#	$(call if_changed,extract_certs,$(SYSTEM_TRUSTED_KEYS_SRCPREFIX)$(CONFIG_SYSTEM_TRUSTED_KEYS))
+$(obj)/x509_certificate_list:
+	@touch $@
 endif # CONFIG_SYSTEM_TRUSTED_KEYRING
 
 clean-files := x509_certificate_list .x509.list
@@ -109,6 +109,6 @@ endif
 $(obj)/system_certificates.o: $(obj)/signing_key.x509
 
 targets += signing_key.x509
-# $(obj)/signing_key.x509: scripts/extract-cert $(X509_DEP) FORCE
-#	$(call if_changed,extract_certs,$(MODULE_SIG_KEY_SRCPREFIX)$(CONFIG_MODULE_SIG_KEY))
+$(obj)/signing_key.x509:
+	@touch $@
 endif # CONFIG_MODULE_SIG
